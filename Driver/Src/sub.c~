@@ -1,0 +1,6 @@
+#include "../subh/sub.h"
+
+void pritnff(void)
+{
+  printf("Fuck you!!");
+}
