@@ -1,0 +1,29 @@
+.
+├── Debug
+│   ├── Driver
+│   │   └── Src
+│   │       ├── sub.d
+│   │       └── sub.o
+│   └── Src
+│       ├── main.d
+│       ├── main.o
+│       ├── main2.d
+│       └── main2.o
+├── Driver
+│   ├── Inc
+│   │   └── sub.h
+│   └── Src
+│       └── sub.c
+├── Inc
+│   ├── conf.h
+│   └── main.h
+├── Makefile
+├── README.md
+├── Src
+│   ├── main.c
+│   └── main2.c
+├── test
+└── tree.txt
+- [error opening dir]
+
+9 directories, 16 files
