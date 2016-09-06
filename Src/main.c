@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include "main.h"
 #include "conf.h"
-//#include "sub.h"
+#include "sub.h"
 
 void main(void)
 {
-  //pf();
+  pf();
   print2();
   printff();
   ptintfff();

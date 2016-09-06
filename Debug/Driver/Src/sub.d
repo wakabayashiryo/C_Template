@@ -1,1 +1,1 @@
-Debug/Driver/Src/sub.o: Src/main.c Inc/main.h Inc/conf.h
+Debug/Driver/Src/sub.o: Driver/Src/sub.c Driver/Inc/sub.h
