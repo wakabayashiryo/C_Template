@@ -1,4 +1,5 @@
 
+
 # CC = arm-none-eabi-gcc
 CC = gcc
 RM = rm -f
@@ -6,33 +7,40 @@ RM = rm -f
 TARGET := test
 CFLAG := -I Inc
 
-SOURCE := Src
-INCLUDE := Inc
-OBJECT := Debug
-DRIVERSOURCE := Driver/Src
-DRIVERINCLUDE := Driver/Inc
+MAINSRC := Src
+MAININC := Inc
+OBJ := Debug
+SUBSRC := Driver/Src
+SUBINC := Driver/Inc
 
-SOURCES := $(wildcard $(SOURCE)/*.c)
-INCLUDES := $(wildcard $(INCLUDE)/*.h)
-OBJECTS := $(addprefix $(OBJECT)/,$(SOURCES:%.c=%.o))
+MAINSRCS := $(wildcard $(MAINSRC)/*.c)
+MAININCS := $(wildcard $(MAININC)/*.h)
+OBJS := $(addprefix $(OBJ)/,$(MAINSRCS:%.c=%.o))
 
-DEPENDS := $(OBJECTS:%.o=%.d)
+SRCS := $(wildcard $(SOURCE)/*.c)
+INCS := $(wildcard $(INCLUDE)/*.h)
+OBJS := $(addprefix $(OBJECT)/,$(SOURCES:%.c=%.o))
 
--include $(DEPENDS)
+DEPS := $(OBJS:%.o=%.d)
+
+-include $(DEPS)
 
 .PHONY: all
 
-$(TARGET): $(OBJECTS)
-	-@echo $(SOURCES)
-	-@echo $(INCLUDES)
-	-@echo $(OBJECTS)
+$(TARGET): $(OBJS)
 	$(CC) -o $@ $^
 
-$(OBJECT)/$(SOURCE)/%.o: $(SOURCE)/%.c
+$(OBJ)/$(MAINSRC)/%.o: $(MAINSRC)/%.c
 	$(CC) $(CFLAG) -o $@ -c -MMD $< 
 
 all: $(TARGET)
 
 .PHONY: clean
 clean: 
-	$(RM) $(TARGET) $(OBJECT)/Src/*.d $(OBJECT)/Src/*.o
+	$(RM) $(TARGET) $(OBJ)/Src/*.d $(OBJ)/Src/*.o
+
+.PHONY: print
+print:
+	-@echo $(MAINSRCS)
+	-@echo $(MAININCS)
+	-@echo $(OBJS)
