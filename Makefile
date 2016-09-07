@@ -5,7 +5,8 @@ CC = gcc
 RM = rm -f
 
 TARGET := test
-CFLAG := -I Inc -I Driver/Inc 
+CFLAG := -g -MMD -MP -Wall -Wextra -Winit-self -Wno-missing-field
+INCLUDE := -I Inc -I Driver/Inc 
 
 MAINSRC := Src
 MAININC :=  Inc
@@ -16,11 +17,11 @@ BIN := bin
 
 MAINSRCS := $(wildcard $(MAINSRC)/*.c)
 MAININCS := $(wildcard $(MAININC)/*.h)
-OBJS := $(addprefix $(OBJ)/,$(MAINSRCS:%.c=%.o))
+OBJS := $(addprefix $(OBJ)/,$(notdir $(MAINSRCS:%.c=%.o)))
 
 SUBSRCS := $(wildcard $(SUBSRC)/*.c)
 SUBINCS := $(wildcard $(SUBINC)/*.h)
-OBJS += $(addprefix $(OBJ)/,$(SUBSRCS:%.c=%.o))
+OBJS += $(addprefix $(OBJ)/,$(notdir $(SUBSRCS:%.c=%.o)))
 
 DEPS := $(OBJS:%.o=%.d)
 
@@ -31,14 +32,14 @@ all: $(BIN)/$(TARGET)
 $(BIN)/$(TARGET): $(OBJS)
 	$(CC) -o $@ $^
 
-$(OBJ)/$(MAINSRC)/%.o: $(MAINSRC)/%.c
-	$(CC) $(CFLAG) -o $@ -c -MMD $<
+$(OBJ)/%.o: $(MAINSRC)/%.c
+	$(CC) $(CFLAG) $(INCLUDE) -o $@ -c -MMD $<
 
-$(OBJ)/$(SUBSRC)/%.o: $(SUBSRC)/%.c
-	$(CC) $(CFLAG) -o $@ -c -MMD $< 
+$(OBJ)/%.o: $(SUBSRC)/%.c
+	$(CC) $(CFLAG) $(INCLUDE) -o $@ -c -MMD $< 
 
 clean: 
-	$(RM) $(BIN)/$(TARGET) $(shell (find ./ -name *.o)) $(shell (find ./ -name *.o))
+	$(RM) $(BIN)/$(TARGET) $(shell (find ./ -name *.o)) $(shell (find ./ -name *.d))
 
 print:
 	-@echo 'MAINSRCS=$(MAINSRCS)'
