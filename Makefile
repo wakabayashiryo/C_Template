@@ -24,7 +24,6 @@ OBJS += $(addprefix $(OBJ)/,$(SUBSRCS:%.c=%.o))
 
 DEPS := $(OBJS:%.o=%.d)
 
-.PHONY: all
 -include $(DEPS)
 
 all: $(BIN)/$(TARGET)
@@ -38,17 +37,15 @@ $(OBJ)/$(MAINSRC)/%.o: $(MAINSRC)/%.c
 $(OBJ)/$(SUBSRC)/%.o: $(SUBSRC)/%.c
 	$(CC) $(CFLAG) -o $@ -c -MMD $< 
 
-.PHONY: clean
 clean: 
 	$(RM) $(BIN)/$(TARGET) $(shell (find ./ -name *.o)) $(shell (find ./ -name *.o))
 
-.PHONY: print
 print:
-	-@echo $(MAINSRCS)
-	-@echo $(MAININCS)
-	-@echo $(OBJS)
-	-@echo $(SUBSRCS)
-	-@echo $(SUBINCS)
-	-@echo $(DEPS)
-	
-	
+	-@echo 'MAINSRCS=$(MAINSRCS)'
+	-@echo 'MAININCS=$(MAININCS)'
+	-@echo 'OBJS=$(OBJS)'
+	-@echo 'SUBSRCS=$(SUBSRCS)'
+	-@echo 'SUBINCS=$(SUBINCS)'
+	-@echo 'DEPS=$(DEPS)'
+
+.PHONY: all clean print	
