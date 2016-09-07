@@ -2,5 +2,5 @@
 
 void pf(void)
 {
-  printf("Sub.c output!!");
+  printf("Sub.c output!!\n");
 }
