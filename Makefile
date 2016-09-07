@@ -8,7 +8,7 @@ TARGET := test
 CFLAG := -I Inc -I Driver/Inc 
 
 MAINSRC := Src
-MAININC := Inc
+MAININC :=  Inc
 OBJ := Debug
 SUBSRC := Driver/Src
 SUBINC := Driver/Inc
@@ -25,7 +25,6 @@ OBJS += $(addprefix $(OBJ)/,$(SUBSRCS:%.c=%.o))
 DEPS := $(OBJS:%.o=%.d)
 
 .PHONY: all
-
 -include $(DEPS)
 
 all: $(BIN)/$(TARGET)
