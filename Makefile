@@ -50,8 +50,8 @@ $(OBJ)/%.o: $(SUBSRC)/%.c
 
 #delete object-files binary-files
 clean: 
-	$(RM) $(BIN)/$(TARGET) $(shell (find ./ -name *.o)) $(shell (find ./ -name *.d))
-
+	$(RM) -R $(OBJ) $(BIN) 
+	
 # disp directory macros
 print:
 	-@echo 'MAINSRCS=$(MAINSRCS)'
