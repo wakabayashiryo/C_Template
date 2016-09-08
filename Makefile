@@ -33,14 +33,17 @@ all: $(BIN)/$(TARGET)
 
 #generate binary-file
 $(BIN)/$(TARGET): $(OBJS)
+	mkdir -p $(BIN)
 	$(CC) -o $@ $^
 
 #sources are generated to objectfile in Maindirectry 
 $(OBJ)/%.o: $(MAINSRC)/%.c
+	mkdir -p $(OBJ)
 	$(CC) $(CFLAG) $(INCLUDE) -o $@ $<
 
 #sources are generated to objectfile in Subdirectry 
 $(OBJ)/%.o: $(SUBSRC)/%.c
+	mkdir -p $(OBJ)	
 	$(CC) $(CFLAG) $(INCLUDE) -o $@ $< 
 
 -include $(DEPS) #-includeは.PHONYとallの間に入れないように
