@@ -27,7 +27,7 @@ DEPS := $(OBJS:%.o=%.d)
 
 .PHONY: all clean print	
 
-all: $(BIN)/$(TARGおT)
+all: $(BIN)/$(TARGT)
 
 $(BIN)/$(TARGET): $(OBJS)
 	$(CC) -o $@ $^
@@ -38,7 +38,7 @@ $(OBJ)/%.o: $(MAINSRC)/%.c
 $(OBJ)/%.o: $(SUBSRC)/%.c
 	$(CC) $(CFLAG) $(INCLUDE) -o $@ $< 
 
--include $(DEPS)#-includeは.PHONYとallの間に入れないように
+-include $(DEPS) #-includeは.PHONYとallの間に入れないように
 
 clean: 
 	$(RM) $(BIN)/$(TARGET) $(shell (find ./ -name *.o)) $(shell (find ./ -name *.d))
