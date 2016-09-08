@@ -5,7 +5,7 @@ CC = gcc
 RM = rm -f
 
 TARGET := test
-CFLAG := -I Inc -I Driver/Inc/ 
+CFLAG := #-I ./#nc -I Driver/Inc/ 
 
 MAINSRC := Src
 MAININC := Inc
@@ -23,18 +23,18 @@ OBJS += $(addprefix $(OBJ)/,$(SUBSRCS:%.c=%.o))
 
 DEPS := $(OBJS:%.o=%.d)
 
--include $(DEPS)
-
 .PHONY: all
 
 $(TARGET): $(OBJS)
 	$(CC) -o $@ $^
 
 $(OBJ)/$(MAINSRC)/%.o: $(MAINSRC)/%.c
-	$(CC) $(CFLAG) -o $@ -c -MMD $<
+	$(CC) $(CFLAG) -I $(MAININCS) -o $@ -c -MMD $<
 
 $(OBJ)/$(SUBSRC)/%.o: $(SUBSRC)/%.c
-	$(CC) $(CFLAG) -o $@ -c -MMD $< 
+	$(CC) $(CFLAG) -I $(SUBINCS) -o $@ -c -MMD $< 
+
+-include $(DEPS)
 
 all: $(TARGET)
 
