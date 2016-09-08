@@ -27,7 +27,7 @@ DEPS := $(OBJS:%.o=%.d)
 
 .PHONY: all clean print	
 
-all: $(BIN)/$(TARGT)
+all: $(BIN)/$(TARGET)
 
 $(BIN)/$(TARGET): $(OBJS)
 	$(CC) -o $@ $^
