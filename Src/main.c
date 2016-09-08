@@ -1,14 +1,16 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "main.h"
 #include "conf.h"
 #include "sub.h"
 
-void main(void)
+int main(void)
 {
   pf();
   print2();
   printff();
   ptintfff();
+  return EXIT_SUCCESS;
 }
 
 void printff(void)
