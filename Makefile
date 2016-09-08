@@ -5,7 +5,7 @@ CC = gcc
 RM = rm -f
 
 TARGET := test
-CFLAG := -g -MMD -MP -Wall -Wextra -Winit-self -Wno-missing-field
+CFLAG := -c -g -MMD -MP -Wall -Wextra -Winit-self
 INCLUDE := -I Inc -I Driver/Inc 
 
 MAINSRC := Src
@@ -25,18 +25,20 @@ OBJS += $(addprefix $(OBJ)/,$(notdir $(SUBSRCS:%.c=%.o)))
 
 DEPS := $(OBJS:%.o=%.d)
 
--include $(DEPS)
+.PHONY: all clean print	
 
-all: $(BIN)/$(TARGET)
+all: $(BIN)/$(TARGおT)
 
 $(BIN)/$(TARGET): $(OBJS)
 	$(CC) -o $@ $^
 
 $(OBJ)/%.o: $(MAINSRC)/%.c
-	$(CC) $(CFLAG) $(INCLUDE) -o $@ -c -MMD $<
+	$(CC) $(CFLAG) $(INCLUDE) -o $@ $<
 
 $(OBJ)/%.o: $(SUBSRC)/%.c
-	$(CC) $(CFLAG) $(INCLUDE) -o $@ -c -MMD $< 
+	$(CC) $(CFLAG) $(INCLUDE) -o $@ $< 
+
+-include $(DEPS)#-includeは.PHONYとallの間に入れないように
 
 clean: 
 	$(RM) $(BIN)/$(TARGET) $(shell (find ./ -name *.o)) $(shell (find ./ -name *.d))
@@ -48,5 +50,3 @@ print:
 	-@echo 'SUBSRCS=$(SUBSRCS)'
 	-@echo 'SUBINCS=$(SUBINCS)'
 	-@echo 'DEPS=$(DEPS)'
-
-.PHONY: all clean print	
