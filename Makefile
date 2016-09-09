@@ -49,6 +49,12 @@ $(OBJ)/%.o: $(word 1,$(LIBSRC))/%.c
 $(OBJ)/%.o: $(word 2,$(LIBSRC))/%.c
 	@mkdir -p $(OBJ)	
 	$(CC) $(CFLAG) $(INCLUDE) -o $@ $<
+
+$(OBJ)/%.o: $(word 2,$(LIBSRC))/%.c
+	@mkdir -p $(OBJ)	
+	$(CC) $(CFLAG) $(INCLUDE) -o $@ $<
+
+
 -include $(DEPF) #-includeは.PHONYとallの間に入れないように
 
 #delete object binary directries
