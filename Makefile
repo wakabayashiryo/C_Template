@@ -11,7 +11,7 @@ TARGET := test
 SRCDIR := Src
 INCDIR := Inc
 LIBDIR := lib
-LIBSRC := $(addprefix lib/,$(addsuffix Src,$(shell cd lib;ls -d */)))
+LIBSRC := $(shell find lib -name Src)
 OBJ := Debug
 BIN := bin
 
@@ -22,8 +22,8 @@ OBJF := $(addprefix $(OBJ)/,$(notdir $(SRCF:%.c=%.o)))
 OBJF += $(addprefix $(OBJ)/,$(notdir $(LIBSRCF:%.c=%.o)))
 #directory of headerfiles macross 
 INCLUDE :=  -I Inc \
-		$(addprefix -I ,$(addsuffix Inc,$(addprefix lib/,$(shell cd lib;ls -d */)) ) )
-
+		$(addprefix -I ,$(shell find lib -name Inc))
+		
 #dependency file
 DEPF := $(OBJF:%.o=%.d)
 
