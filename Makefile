@@ -11,7 +11,7 @@ TARGET := test
 SRCDIR := Src
 INCDIR := Inc
 LIBDIR := lib
-LIBSRC := $(shell find lib -name Src)
+LIBSRC := $(shell find $(LIBDIR) -name Src)
 OBJ := Debug
 BIN := bin
 
