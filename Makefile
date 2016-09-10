@@ -1,10 +1,21 @@
+#
+#  File-Name: Makefile
+#
+#  Created on: 2016/9/10
+#  Author: Wakabayashi Ryo
+#
+#	File-History:
+# 	>date Detail
+#	>2016/9/10 generate this file 
+#
+
 #command of compile and compile options , remove 
 CC = gcc	
 CFLAG := -c -g -MMD -MP -Wall -Wextra -Winit-self
 RM = rm -f -R 
 
 #target name
-TARGET := test
+TARGET := project
 			
 #directory macros
 SRCDIR := Src
