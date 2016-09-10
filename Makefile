@@ -18,8 +18,8 @@ BIN := bin
 
 SRCF := $(wildcard $(SRCDIR)/*.c)
 LIBSRCF := $(foreach dir,$(LIBSRC),$(wildcard $(dir)/*.c))
-OBJF := $(addprefix $(OBJ)/,$(notdir $(SRCF:%.c=%.o)))
-OBJF += $(addprefix $(OBJ)/,$(notdir $(LIBSRCF:%.c=%.o)))
+OBJF := $(addprefix $(OBJ)/,$(notdir $(SRCF:%.c=%.o)))\
+	 $(addprefix $(OBJ)/,$(notdir $(LIBSRCF:%.c=%.o)))
 #directory of headerfiles macross 
 INCLUDE :=  -I Inc \
 		$(addprefix -I ,$(shell find lib -name Inc))
@@ -50,7 +50,7 @@ $(OBJ)/%.o: $(word 2,$(LIBSRC))/%.c
 	@mkdir -p $(OBJ)	
 	$(CC) $(CFLAG) $(INCLUDE) -o $@ $<
 
-$(OBJ)/%.o: $(word 2,$(LIBSRC))/%.c
+$(OBJ)/%.o: $(word 3,$(LIBSRC))/%.c
 	@mkdir -p $(OBJ)	
 	$(CC) $(CFLAG) $(INCLUDE) -o $@ $<
 
@@ -60,12 +60,3 @@ $(OBJ)/%.o: $(word 2,$(LIBSRC))/%.c
 #delete object binary directries
 clean: 
 	$(RM) $(OBJ) $(BIN) 
-	
-# disp directory macros
-print:
-	@echo 'INCLUDE=$(INCLUDE)'
-	@echo 'SRCF=$(SRCF)'
-	@echo 'LIBSRC=$(LIBSRC)'
-	@echo 'LIBSRCF=$(LIBSRCF)'
-	@echo 'OBJF=$(OBJF)'
-	@echo 'DEPF=$(DEPF)'
