@@ -1,4 +1,3 @@
-
 #command of compile and compile options , remove 
 CC = gcc	
 CFLAG := -c -g -MMD -MP -Wall -Wextra -Winit-self
@@ -13,7 +12,7 @@ INCDIR := Inc
 LIBDIR := lib
 LIBSRC := $(shell find $(LIBDIR) -name Src)
 OBJ := Debug
-BIN := bin
+BIN := Bin
 
 
 SRCF := $(wildcard $(SRCDIR)/*.c)
@@ -54,6 +53,33 @@ $(OBJ)/%.o: $(word 3,$(LIBSRC))/%.c
 	@mkdir -p $(OBJ)	
 	$(CC) $(CFLAG) $(INCLUDE) -o $@ $<
 
+$(OBJ)/%.o: $(word 4,$(LIBSRC))/%.c
+	@mkdir -p $(OBJ)	
+	$(CC) $(CFLAG) $(INCLUDE) -o $@ $<
+
+$(OBJ)/%.o: $(word 5,$(LIBSRC))/%.c
+	@mkdir -p $(OBJ)	
+	$(CC) $(CFLAG) $(INCLUDE) -o $@ $<
+
+$(OBJ)/%.o: $(word 6,$(LIBSRC))/%.c
+	@mkdir -p $(OBJ)	
+	$(CC) $(CFLAG) $(INCLUDE) -o $@ $<
+
+$(OBJ)/%.o: $(word 7,$(LIBSRC))/%.c
+	@mkdir -p $(OBJ)	
+	$(CC) $(CFLAG) $(INCLUDE) -o $@ $<
+
+$(OBJ)/%.o: $(word 8,$(LIBSRC))/%.c
+	@mkdir -p $(OBJ)	
+	$(CC) $(CFLAG) $(INCLUDE) -o $@ $<
+
+$(OBJ)/%.o: $(word 9,$(LIBSRC))/%.c
+	@mkdir -p $(OBJ)	
+	$(CC) $(CFLAG) $(INCLUDE) -o $@ $<
+
+$(OBJ)/%.o: $(word 10,$(LIBSRC))/%.c
+	@mkdir -p $(OBJ)	
+	$(CC) $(CFLAG) $(INCLUDE) -o $@ $<
 
 -include $(DEPF) #-includeは.PHONYとallの間に入れないように
 
