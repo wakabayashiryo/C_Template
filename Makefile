@@ -29,7 +29,7 @@ SRCF := $(wildcard $(SRCDIR)/*.c)
 LIBSRCF := $(foreach dir,$(LIBSRC),$(wildcard $(dir)/*.c))
 OBJF := $(addprefix $(OBJ)/,$(notdir $(SRCF:%.c=%.o)))\
 	 $(addprefix $(OBJ)/,$(notdir $(LIBSRCF:%.c=%.o)))
-#directory of headerfiles macross 
+#directory of headerfiles macros
 INCLUDE :=  -I Inc \
 		$(addprefix -I ,$(shell find lib -name Inc))
 		
@@ -38,23 +38,23 @@ DEPF := $(OBJF:%.o=%.d)
 
 VPATH := $(LIBSRC)
 
-.PHONY: all clean print	fr
+.PHONY: all clean
 
 all: $(BIN)/$(TARGET)
 
 #generate binary-file
 $(BIN)/$(TARGET): $(OBJF)
-	@mkdir -p $(BIN)
+	-@mkdir -p $(BIN)
 	$(CC) -o $@ $^
 
 #sources are generated to objectfile in Maindirectry 
 $(OBJ)/%.o: $(SRCDIR)/%.c
-	@mkdir -p $(OBJ)
+	-@mkdir -p $(OBJ)
 	$(CC) $(CFLAG) $(INCLUDE) -o $@ $<
 
 #sources are generated to objectfile in Subdirectry 
 $(OBJ)/%.o: %.c
-	@mkdir -p $(OBJ)
+	-@mkdir -p $(OBJ)
 	$(CC) $(CFLAG) $(INCLUDE) -o $@ $<
 	
 -include $(DEPF) #-includeは.PHONYとallの間に入れないように
