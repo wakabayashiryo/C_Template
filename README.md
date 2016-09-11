@@ -19,13 +19,10 @@
 ~~~:txt
 .
 ├── Inc
-│  ├── README.md
 │  └── main.h
 ├── Src
-│  ├── README.md
 │  └── main.c
 ├── lib
-│  ├── README.md
 │  └── sample
 │      ├── Inc
 │      │  └── sub.h
