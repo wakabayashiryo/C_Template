@@ -17,7 +17,7 @@
 #include "sample.h"
 /*user define*/
 
-#define SAMPLE 1 //disp sample message when 1
+#define SAMPLE 0 //disp sample message when 1
 
 int main(void)
 {
