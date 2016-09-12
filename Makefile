@@ -11,7 +11,8 @@
 
 #command of compile and compile options , remove 
 CC = gcc	
-CFLAG := -c -g -MMD -MP -Wall -Wextra -Winit-self
+OPTIMIZE := -O0
+CFLAGS := -c -g $(OPTIMIZE) -std=c99 -MMD -MP -Wall -Wextra -Winit-self
 RM = rm -f -R 
 
 #target name
@@ -24,6 +25,7 @@ LIBDIR := lib
 LIBSRC := $(shell find $(LIBDIR) -name Src)
 OBJ := Debug
 BIN := Bin
+
 
 SRCF := $(wildcard $(SRCDIR)/*.c)
 LIBSRCF := $(foreach dir,$(LIBSRC),$(wildcard $(dir)/*.c))
@@ -50,12 +52,12 @@ $(BIN)/$(TARGET): $(OBJF)
 #sources are generated to objectfile in Maindirectry 
 $(OBJ)/%.o: $(SRCDIR)/%.c
 	-@mkdir -p $(OBJ)
-	$(CC) $(CFLAG) $(INCLUDE) -o $@ $<
+	$(CC) $(CFLAGS) $(INCLUDE) -o $@ $<
 
 #sources are generated to objectfile in Subdirectry 
 $(OBJ)/%.o: %.c
 	-@mkdir -p $(OBJ)
-	$(CC) $(CFLAG) $(INCLUDE) -o $@ $<
+	$(CC) $(CFLAGS) $(INCLUDE) -o $@ $<
 	
 -include $(DEPF) #-includeは.PHONYとallの間に入れないように
 
