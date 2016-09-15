@@ -9,15 +9,16 @@
 #	>2016/9/10 generate this file 
 #
 
-#command of compile and compile options , remove 
-CC = gcc	
-OPTIMIZE := -O0
-CFLAGS := -c -g $(OPTIMIZE) -std=c99 -MMD -MP -Wall -Wextra -Winit-self
-RM = rm -f -R 
-
 #target name
 TARGET := project
 			
+#command of compile and compile options , remove 
+CC = gcc	
+OPTIMIZE := -O0
+CFLAGS := -c -g $(OPTIMIZE) -std=c99 -MMD -MP -Wall -Wextra -Winit-self 
+LDFLAG := -Wl,-Map=Debug/$(TARGET).map 
+RM = rm -f -r 
+
 #directory macros
 SRCDIR := Src
 INCDIR := Inc
@@ -38,7 +39,7 @@ INCLUDE :=  -I Inc \
 #dependency file
 DEPF := $(OBJF:%.o=%.d)
 
-VPATH := $(LIBSRC)
+VPATH := $(LIBSRC) $(SRCDIR) 
 
 .PHONY: all clean
 
@@ -47,12 +48,7 @@ all: $(BIN)/$(TARGET)
 #generate binary-file
 $(BIN)/$(TARGET): $(OBJF)
 	-@mkdir -p $(BIN)
-	$(CC) -o $@ $^
-
-#sources are generated to objectfile in Maindirectry 
-$(OBJ)/%.o: $(SRCDIR)/%.c
-	-@mkdir -p $(OBJ)
-	$(CC) $(CFLAGS) $(INCLUDE) -o $@ $<
+	$(CC) $(LDFLAG) -o $@ $^
 
 #sources are generated to objectfile in Subdirectry 
 $(OBJ)/%.o: %.c
