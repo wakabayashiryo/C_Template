@@ -11,7 +11,7 @@
 
 #target name
 TARGET := project
-			
+
 #command of compile and compile options , remove 
 CC = gcc	
 OPTIMIZE := -O0
@@ -23,23 +23,23 @@ RM = rm -f -r
 SRCDIR := Src
 INCDIR := Inc
 LIBDIR := lib
-LIBSRC := $(shell find $(LIBDIR) -name Src)
+LIBDIR := $(shell find $(LIBDIR) -name Src)
 OBJ := Debug
 BIN := Bin
 
 
 SRCF := $(wildcard $(SRCDIR)/*.c)
-LIBSRCF := $(foreach dir,$(LIBSRC),$(wildcard $(dir)/*.c))
+LIBSRCF := $(foreach dir,$(LIBDIR),$(wildcard $(dir)/*.c))
 OBJF := $(addprefix $(OBJ)/,$(notdir $(SRCF:%.c=%.o)))\
 	 $(addprefix $(OBJ)/,$(notdir $(LIBSRCF:%.c=%.o)))
 #directory of headerfiles macros
 INCLUDE :=  -I Inc \
 		$(addprefix -I ,$(shell find lib -name Inc))
-		
+
 #dependency file
 DEPF := $(OBJF:%.o=%.d)
 
-VPATH := $(LIBSRC) $(SRCDIR) 
+VPATH := $(LIBDIR) $(SRCDIR) 
 
 .PHONY: all clean
 
@@ -54,7 +54,7 @@ $(BIN)/$(TARGET): $(OBJF)
 $(OBJ)/%.o: %.c
 	-@mkdir -p $(OBJ)
 	$(CC) $(CFLAGS) $(INCLUDE) -o $@ $<
-	
+
 -include $(DEPF) #-includeは.PHONYとallの間に入れないように
 
 #delete object binary directries
