@@ -15,15 +15,14 @@ TARGET := project
 #command of compile and compile options , remove 
 CC = gcc	
 OPTIMIZE := -O0
-CFLAGS := -c -g $(OPTIMIZE) -std=c99 -MMD -MP -Wall -Wextra -Winit-self 
-LDFLAG := -Wl,-Map=Debug/$(TARGET).map 
+CFLAGS := -c -g $(OPTIMIZE) -std=c99 -MMD -MP -Wall -Wextra -Winit-self -lm
+LDFLAG := -Wl,-Map=Debug/$(TARGET).map -lm
 RM = rm -f -r 
 
 #directory macros
 SRCDIR := Src
 INCDIR := Inc
-LIBDIR := lib
-LIBDIR := $(shell find $(LIBDIR) -name Src)
+LIBDIR := $(shell find lib -name Src)
 OBJ := Debug
 BIN := Bin
 
