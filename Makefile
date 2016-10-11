@@ -15,8 +15,9 @@ TARGET := project
 #command of compile and compile options , remove 
 CC = gcc	
 OPTIMIZE := -O0
-CFLAGS := -c -g $(OPTIMIZE) -std=c99 -MMD -MP -Wall -Wextra -Winit-self -lm
-LDFLAG := -Wl,-Map=Debug/$(TARGET).map -lm
+CFLAGS := -c -g $(OPTIMIZE) -std=c99 -MMD -MP -Wall -Wextra -Winit-self
+LDFLAG := -Wl,-Map=Debug/$(TARGET).map
+LIB := -lm
 RM = rm -f -r 
 
 #directory macros
@@ -47,12 +48,12 @@ all: $(BIN)/$(TARGET)
 #generate binary-file
 $(BIN)/$(TARGET): $(OBJF)
 	-@mkdir -p $(BIN)
-	$(CC) $(LDFLAG) -o $@ $^
+	$(CC) $(LDFLAG) -o $@ $^ $(LIB)
 
 #sources are generated to objectfile in Subdirectry 
 $(OBJ)/%.o: %.c
 	-@mkdir -p $(OBJ)
-	$(CC) $(CFLAGS) $(INCLUDE) -o $@ $<
+	$(CC) $(CFLAGS) $(INCLUDE) -o $@ $< $(LIB)
 
 -include $(DEPF) #-includeは.PHONYとallの間に入れないように
 
