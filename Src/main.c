@@ -13,6 +13,7 @@
  */
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdint.h>
 #include "main.h"
 #include "sample.h"
 /*user define*/
